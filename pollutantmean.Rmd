@@ -1,0 +1,20 @@
+```{r}
+# Crear el directorio si no existe
+if (!dir.exists("specdata")) dir.create("specdata")
+
+# Generar 332 archivos CSV con datos ficticios
+set.seed(123)  # Para reproducibilidad
+for (i in 1:332) {
+  n <- sample(100:200, 1)  # Número aleatorio de filas por archivo
+  data <- data.frame(
+    Date = seq.Date(from = as.Date("2000-01-01"), by = "day", length.out = n),
+    sulfate = round(runif(n, min = 0, max = 10), 3),
+    nitrate = round(runif(n, min = 0, max = 10), 3)
+  )
+  write.csv(data, file = sprintf("specdata/%03d.csv", i), row.names = FALSE)
+}
+
+print("Archivos generados en la carpeta 'specdata'.")
+
+```
+
